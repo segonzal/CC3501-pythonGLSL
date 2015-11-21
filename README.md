@@ -5,7 +5,7 @@ del curso CC3501 Modelación y Computación Gráfica para Ingenieros de la Unive
 
 ## Wiki
 
-Cada carpeta de este repositorio contiene un ejemplo de OpenGL y GLSL en python. Además está la [wiki](./wiki) con un tutorial completo, explicando paso a paso como funcionan los programas.
+Cada carpeta de este repositorio contiene un ejemplo de OpenGL y GLSL en python. Además está la [wiki](https://github.com/segonzal/CC3501-pythonGLSL/wiki) con un tutorial completo, explicando paso a paso como funcionan los programas.
 
 ## Dependencias
 
