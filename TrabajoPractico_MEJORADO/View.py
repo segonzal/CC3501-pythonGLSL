@@ -18,9 +18,14 @@ class View:
         self.screen = pygame.display.set_mode((width,height),OPENGL | DOUBLEBUF)
         self.fovy_near_far = (fovy,near,far)
         self.shader_program = None
+        self.model = None
 
     def update(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        if self.model is not None:
+            pass
+
         pygame.display.flip()
 
     def close(self):

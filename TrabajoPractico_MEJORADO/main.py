@@ -15,7 +15,7 @@ def main(argc,argv):
     # son las cosas minimas necesarias para crear la ventana
     c = Controller()
     v = View((WIDTH,HEIGHT),(90.0, 0.1, 100.0))
-    m = Model()
+    m = Model(Triangle((0,1,0),(1,0,0),(0,0,0)))
 
     # configurar la ventana
     v.init_GL((0.0, 0.5, 0.5, 1.0))
@@ -23,6 +23,9 @@ def main(argc,argv):
     shader_program = Shader("basic_shader")
     shader_program.compile()
     v.useShader(shader_program)
+
+    # Le entregamos el modelo a la vista
+    v.model = m
 
     run = True
     while run:
