@@ -3,12 +3,9 @@ import re
 
 # Este metodo nos permitira cargar todo el contenido del archivo en una linea
 def dumpfile(filename):
-    data = ""
-    for line in open(filename):
-        if line.startswith('#'):
-            data += line
-        else:
-            data += re.sub(r"\s+", ' ',line[:-1])
+    file = open(filename,'r')
+    data = "".join([line for line in file])
+    file.close()
     return data
 
 
