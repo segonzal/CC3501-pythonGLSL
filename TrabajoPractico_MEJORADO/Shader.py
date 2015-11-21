@@ -1,25 +1,23 @@
 from OpenGL.GL import *
-import re
 
-# Este metodo nos permitira cargar todo el contenido del archivo en una linea
+# Este metodo regresa el contenido de un archivo en un string.
 def dumpfile(filename):
     file = open(filename,'r')
     data = "".join([line for line in file])
     file.close()
     return data
 
-
-# Esta funcion utilitaria de sahders nos permitira conocer errores de compilacion
+# Esta funcion utilitaria de shaders nos permite conocer errores de compilacion
 # de los shaders y facilitar el debugging
 def createShader(code,type):
     # Creamos un nuevo shader del tipo especificado: VERTEX o FRAGMENT
     shader = glCreateShader(type)
-    # Senalamos cual es su codigo fuente
+    # Indicamos cual es su codigo fuente
     glShaderSource(shader,code)
     # Compilamos el shader
     glCompileShader(shader)
 
-    # chequeamos en caso de errores
+    # Chequeamos en caso de errores
     result = glGetShaderiv(shader,GL_COMPILE_STATUS)
     if (result!=1):
         # Podemos saber que shader fallo
