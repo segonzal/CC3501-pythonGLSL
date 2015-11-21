@@ -3,6 +3,7 @@ import sys
 from Controller import *
 from View import *
 from Model import *
+from Shader import *
 
 WIDTH = 640;
 HEIGHT = 480
@@ -18,7 +19,10 @@ def main(argc,argv):
 
     # configurar la ventana
     v.init_GL((0.0, 0.5, 0.5, 1.0))
-
+    # Creamos el Shader y se lo entregamos a la vista
+    shader_program = Shader("basic_shader")
+    shader_program.compile()
+    v.useShader(shader_program)
 
     run = True
     while run:

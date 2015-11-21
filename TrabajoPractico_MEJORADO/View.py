@@ -17,6 +17,7 @@ class View:
     def __init__(self,(width,height),(fovy,near,far)):
         self.screen = pygame.display.set_mode((width,height),OPENGL | DOUBLEBUF)
         self.fovy_near_far = (fovy,near,far)
+        self.shader_program = None
 
     def update(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -46,3 +47,7 @@ class View:
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
+
+    def useShader(self,shader_program):
+        self.shader_program = shader_program
+        self.shader_program.use()
