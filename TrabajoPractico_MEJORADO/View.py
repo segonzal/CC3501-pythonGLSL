@@ -8,6 +8,9 @@ from pygame.locals import *
 from pygame.locals import *
 from OpenGL.GL import *
 
+LIGHT_COLOR = (1,1,1)
+LIGHT_POSITION = (10,10,10)
+
 def perspectiveGL(fovy, aspect, near, far):
     fH = math.tan(fovy/360.0) * math.pi * near
     fW = fH * aspect
@@ -22,9 +25,25 @@ class View:
 
     def update(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glLoadIdentity()
 
         if self.model is not None:
-            pass
+            # Establecemos los valores de los uniformes
+            self.shader_program.setUniform("lightCol",LIGHT_COLOR)
+            self.shader_program.setUniform("lightPos",LIGHT_POSITION)
+
+            # Activamos los atributos
+            self.shader_program.enableVAA("position")
+            self.shader_program.enableVAA("color")
+            self.shader_program.enableVAA("normal")
+
+            # Dibujamos el modelo usando triangulos
+            glDrawArrays(GL_TRIANGLES, 0, self.model.size)
+
+            # Desactivamos los atributos
+            self.shader_program.disableVAA("normal")
+            self.shader_program.disableVAA("color")
+            self.shader_program.disableVAA("position")
 
         pygame.display.flip()
 

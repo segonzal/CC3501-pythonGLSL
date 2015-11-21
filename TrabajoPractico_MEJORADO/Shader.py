@@ -40,6 +40,8 @@ class Shader:
         # (VERTEX, FRAGMENT)
         self.code = (dumpfile(filename+".vs"),dumpfile(filename+".fs"))
         self.program = None
+        self.uniform_location = None
+        self.attribute_location = None
 
     def use(self):
 		glUseProgram(self.program)
@@ -81,3 +83,19 @@ class Shader:
     def delete(self):
         glDeleteProgram(self.program)
         self.program = None
+        self.uniform_location = None
+        self.attribute_location = None
+
+    def enableVAA(self,loc):
+        glEnableVertexAttribArray(self.attribute_location[loc])
+
+    def disableVAA(self,loc):
+        glDisableVertexAttribArray(self.attribute_location[loc])
+
+    def bindAttributeLocation(self,locations):
+        self.attribute_location = locations
+        for loc_name in self.attribute_location:
+            glBindAttribLocation(self.program, self.attribute_location[loc_name], loc_name)
+
+    def setUniform(self,name,value):
+        glUniform3f(self.uniform_location[name], value[0], value[1], value[2])

@@ -19,9 +19,23 @@ def main(argc,argv):
 
     # configurar la ventana
     v.init_GL((0.0, 0.5, 0.5, 1.0))
-    # Creamos el Shader y se lo entregamos a la vista
+    # Creamos el Shader
     shader_program = Shader("basic_shader")
     shader_program.compile()
+
+    # Configuramos las ubicaciones de los uniformes
+    shader_program.uniform_location = {
+        "lightPos": glGetUniformLocation(shader_program.program, "lightPos"),
+        "lightCol": glGetUniformLocation(shader_program.program, "lightCol")
+    }
+    # Configuramos las ubicaciones de los atributos
+    shader_program.bindAttributeLocation({
+        "position": 0,
+        "color": 1,
+        "normal": 2
+    })
+
+    # Le entregamos los shaders a la vista para que los use
     v.useShader(shader_program)
 
     # Le entregamos el modelo a la vista
