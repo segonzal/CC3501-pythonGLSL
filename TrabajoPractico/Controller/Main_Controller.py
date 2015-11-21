@@ -24,7 +24,7 @@ class Main_Controller:
         glBindAttribLocation(self.program, self.color_loc, "color")
         glBindAttribLocation(self.program, self.normal_loc, "normal")
 
-        self.cube = Cube.Cube((-5, -5, -5), (5, 5, 5), (1, 1, 1, 1.0))
+        self.cube = Cube.Cube((-5, -5, -5), (5, 5, 5), (0, 0, 1, 1.0))
         self.buffer = glGenBuffers(1)
 
         Shaders_Methods.asign_attributes(self.cube.get_vertex_array(),

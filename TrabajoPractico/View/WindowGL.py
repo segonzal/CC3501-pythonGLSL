@@ -15,7 +15,7 @@ class WindowGL:
         self.reshape()
         self.angle = 0
         self.R = 20
-        self.color = 0
+        self.color = 0xffffff
 
     def perspectiveGL(self, fovy, aspect, near, far):
         fH = math.tan(fovy/360.0) * math.pi * near

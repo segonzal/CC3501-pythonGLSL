@@ -30,9 +30,9 @@ uniform vec3 lightPos;
 uniform vec3 lightCol;
 
 void main(){
-    float blend = 0.5;
     float d = max(dot(myNormal,normalize(lightPos-myPosition)),0.0);
-    vec3 color = blend*lightCol + (1-blend)*myColor.rgb;
-	gl_FragColor = vec4(color*d,myColor.a);
+	float blend = 0.5;
+    vec3 color = blend*(lightCol*d) + (1-blend)*myColor.rgb;
+	gl_FragColor = vec4(color,myColor.a);
 }
 """
