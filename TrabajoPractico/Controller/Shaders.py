@@ -1,7 +1,7 @@
 __author__ = 'mllorens'
 
 VERTEX = """
-
+#version 120
 attribute vec3 position;
 attribute vec4 color;
 attribute vec3 normal;
@@ -21,7 +21,7 @@ void main(){
 """
 
 FRAGMENT = """
-
+#version 120
 varying vec4 myColor;
 varying vec3 myNormal;
 varying vec3 myPosition;
@@ -32,7 +32,7 @@ uniform vec3 lightCol;
 void main(){
     float blend = 0.5;
     float d = max(dot(myNormal,normalize(lightPos-myPosition)),0.0);
-    vec3 color = blend*lightCol + (1-blend)*myColor;
+    vec3 color = blend*lightCol + (1-blend)*myColor.rgb;
 	gl_FragColor = vec4(color*d,myColor.a);
 }
 """
