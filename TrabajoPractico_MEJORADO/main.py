@@ -33,6 +33,8 @@ def main(argc,argv):
 
         run = c.check_close()
 
+    shader_program.delete()
+
     # cerrar subsistemas
     c.close()
     m.close()

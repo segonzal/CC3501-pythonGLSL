@@ -45,6 +45,7 @@ class Shader:
 		glUseProgram(self.program)
 
     def compile(self):
+        if self.program is not None: raise Exception("Shader already compiled")
         vertex,fragment = self.code
         # pedimos espacio a la CPU para el programa
         self.program = glCreateProgram()
@@ -65,11 +66,18 @@ class Shader:
         if (result != GL_TRUE):
             print "Couldn't link program"
             glGetProgramInfoLog(self.program)
-            glDeleteShader(vshader)
-            glDeleteShader(fshader)
-            glDeleteProgram(self.program)
-            exit(1)
 
         # Podemos desacernos de estos.
         glDetachShader(self.program,vshader)
         glDetachShader(self.program,fshader)
+        glDeleteShader(vshader)
+        glDeleteShader(fshader)
+
+        # Ahorramos repetir codigo, esto se ejecuta solo en caso de error
+        if (result != GL_TRUE):
+            glDeleteProgram(self.program)
+            exit(1)
+
+    def delete(self):
+        glDeleteProgram(self.program)
+        self.program = None
