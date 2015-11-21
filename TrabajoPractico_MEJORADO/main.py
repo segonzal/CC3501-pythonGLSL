@@ -15,7 +15,8 @@ def main(argc,argv):
     # son las cosas minimas necesarias para crear la ventana
     c = Controller()
     v = View((WIDTH,HEIGHT),(90.0, 0.1, 100.0))
-    m = Model(Triangle((0,1,0),(1,0,0),(0,0,0)))
+    #m = Model(Cube((-5,-5,-5),(5,5,5)))
+    m = Model(Triangle((5,5,-15),(-5,-5,-15),(5,-5,-15)))
 
     # configurar la ventana
     v.init_GL((0.0, 0.5, 0.5, 1.0))
@@ -44,9 +45,9 @@ def main(argc,argv):
     run = True
     while run:
         # actualizar subsistemas
-        c.update()
-        m.update()
-        v.update()
+        dt = c.update()
+        m.update(dt)
+        v.update(dt)
 
         run = c.check_close()
 

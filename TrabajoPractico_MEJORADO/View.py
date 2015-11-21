@@ -22,12 +22,26 @@ class View:
         self.fovy_near_far = (fovy,near,far)
         self.shader_program = None
         self.model = None
+        self.buffer = None
+        self.angle = 0
 
-    def update(self):
+    def update(self,dt):
+        # limpiamos la ventana
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glLoadIdentity()
 
+        # recalculamos el angulo para rotar las figuras
+        self.angle += 0.0001*dt*360
+
+        # Aplicamos las transformaciones lineales
+        glTranslate(0,0,-20)
+        glRotate(-self.angle,1,0.5,1)
+
         if self.model is not None:
+            if self.model.has_changed:
+                self.shader_program.bindBuffer(self.buffer,self.model)
+                self.model.has_changed = False
+
             # Establecemos los valores de los uniformes
             self.shader_program.setUniform("lightCol",LIGHT_COLOR)
             self.shader_program.setUniform("lightPos",LIGHT_POSITION)
@@ -59,6 +73,9 @@ class View:
         glEnable(GL_DEPTH_TEST)
         glDepthFunc(GL_LEQUAL)
         self.reshape()
+
+        # reservamos un buffer de datos en la tarjeta grafica
+        self.buffer = glGenBuffers(1)
 
     def reshape(self):
         (fovy,near,far) = self.fovy_near_far

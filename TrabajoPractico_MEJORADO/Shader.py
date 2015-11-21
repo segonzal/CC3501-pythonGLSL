@@ -34,6 +34,30 @@ def createShader(code,type):
         exit(1)
     return shader
 
+def setAttribute(loc, _size, _type, normalized, stride, offset):
+    """
+    attribute(loc,size,type,normalized,stride,offset)
+
+    loc: Specifies the index of the generic vertex attribute to be modified.
+    size: Specifies the number of components per generic vertex attribute.
+          Must be 1, 2, 3, 4.
+    type: Specifies the data type of each component in the array.
+          GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT,
+          GL_UNSIGNED_INT, GL_FLOAT and GL_DOUBLE.
+    normalized: Specifies whether fixed-point data values should be normalized (True) or
+          converted directly as fixed-point values (False)
+    stride: Specifies the byte offset between consecutive generic vertex attributes.
+    offset: Specifies a offset of the first component of the first generic vertex attribute in the
+            array in the data store of the buffer currently bound to the GL_ARRAY_BUFFER target.
+    """
+    # https://www.opengl.org/sdk/docs/man/html/glVertexAttribPointer.xhtml
+    glEnableVertexAttribArray(loc)
+
+    glVertexAttribPointer(loc, _size, _type, normalized, stride, ctypes.c_void_p(offset))
+
+    glDisableVertexAttribArray(loc)
+
+
 class Shader:
     def __init__(self,filename):
         # Suponemos que los shaders a usar se llaman <filename>.vs y <filename>.fs
@@ -99,3 +123,16 @@ class Shader:
 
     def setUniform(self,name,value):
         glUniform3f(self.uniform_location[name], value[0], value[1], value[2])
+
+    def bindBuffer(self,buffer,model):
+        glBindBuffer(GL_ARRAY_BUFFER, buffer)
+        glBufferData(GL_ARRAY_BUFFER, model.array, GL_STATIC_DRAW)
+        (psz,csz,nsz) = model.att_sz
+        # El tamano de un FLOAT es 4 bytes
+        stride = 4 * (psz+csz+nsz)
+        offset = 0
+        setAttribute(self.attribute_location["position"], psz, GL_FLOAT, False, stride, offset)
+        offset = 4*psz
+        setAttribute(self.attribute_location["color"], csz, GL_FLOAT, False, stride, offset)
+        offset = 4*(psz+csz)
+        setAttribute(self.attribute_location["normal"], nsz, GL_FLOAT, False, stride, offset)
