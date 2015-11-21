@@ -13,7 +13,7 @@ def main(argc,argv):
     # inicializar subsistemas
     # son las cosas minimas necesarias para crear la ventana
     c = Controller()
-    v = View(WIDTH,HEIGHT)
+    v = View((WIDTH,HEIGHT),(90.0, 0.1, 100.0))
     m = Model()
 
     # configurar la ventana
