@@ -13,13 +13,13 @@ Estas son las dependencias usadas por los programas en este repositorio.
 
 Linux:
 
-Numpy: `sudo apt-get install python-numpy`
-OpenGL: `sudo apt-get install python-opengl`
-Pygame: `sudo apt-get install python-pygame`
+* Numpy: `sudo apt-get install python-numpy`
+* OpenGL: `sudo apt-get install python-opengl`
+* Pygame: `sudo apt-get install python-pygame`
 
 Windows:
 
-[Python](https://www.python.org/download/releases/2.7/)
-[Numpy (Dentro del paquete Anconda)](https://www.continuum.io/downloads#_windows)
-[OpenGL](http://pyopengl.sourceforge.net/documentation/installation.html)
-[Pygame](http://www.pygame.org/download.shtml)
+* [Python](https://www.python.org/download/releases/2.7/)
+* [Numpy (Dentro del paquete Anconda)](https://www.continuum.io/downloads#_windows)
+* [OpenGL](http://pyopengl.sourceforge.net/documentation/installation.html)
+* [Pygame](http://www.pygame.org/download.shtml)
