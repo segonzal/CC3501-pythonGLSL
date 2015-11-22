@@ -15,8 +15,8 @@ def main(argc,argv):
     # son las cosas minimas necesarias para crear la ventana
     c = Controller()
     v = View((WIDTH,HEIGHT),(90.0, 0.1, 100.0))
-    #m = Model(Cube((-5,-5,-5),(5,5,5)))
-    m = Model(Triangle((5,5,-15),(-5,-5,-15),(5,-5,-15)))
+    # m = Model(Triangle((5,5,-15),(-5,-5,-15),(5,-5,-15)))
+    m = Model(Cube((-5,-5,-5),(5,5,5)))
 
     # configurar la ventana
     v.init_GL((0.0, 0.5, 0.5, 1.0))
